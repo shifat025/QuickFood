@@ -13,3 +13,6 @@ PyYAML
 sqlparse
 tzdata
 uritemplate
+psycopg2
+psycopg2-binary
+dj-database-url

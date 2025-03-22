@@ -9,15 +9,22 @@ class Order(models.Model):
         ('Delivered', 'Delivered'),
         ('Canceled', 'Canceled'),  # Added Canceled status
     ]
+    PAYMENT_METHOD_CHOICES = [
+        ('COD', 'Cash on Delivery'),
+        ('Online', 'Online Payment'),
+    ]
+
     user = models.ForeignKey(User, on_delete=models.CASCADE)
     menuitem = models.ForeignKey(MenuItem, on_delete=models.CASCADE)
     name = models.CharField(max_length=255)
     number = models.IntegerField()
+    payment_method = models.CharField(max_length=50, choices=PAYMENT_METHOD_CHOICES)
     DeliveryAdress = models.CharField(max_length=255)
     DeliveryInstructions = models.CharField(max_length=255,blank=True, null=True)
     status = models.CharField(max_length=50, choices=STATUS_CHOICES, default='Preparing')
     total_price = models.DecimalField(max_digits=10, decimal_places=2)
     order_created = models.DateTimeField(auto_now_add=True)
+    quantity = models.PositiveIntegerField(default=1)
     cancel_reason = models.CharField(max_length=255, blank=True, null=True)
 
 

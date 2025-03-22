@@ -30,7 +30,7 @@ SECRET_KEY = 'django-insecure-fnpo1*)bnaj8(xyc%6l@=bc@eiaofz)@-j399tbsxrzr1qgs!9
 DEBUG = True
 
 ALLOWED_HOSTS = ['*']
-CSRF_TRUSTED_ORIGINS = ['http://localhost:5173', 'http://127.0.0.1:5173', 'https://quickfood-x9fk.onrender.com/', 'https://sell-stream.netlify.app']
+CSRF_TRUSTED_ORIGINS = ['http://localhost:5173', 'http://127.0.0.1:5173', 'https://quickfood-x9fk.onrender.com/', 'https://quick-food-frontend.vercel.app/']
 CORS_ALLOW_ALL_ORIGINS = True
 
 

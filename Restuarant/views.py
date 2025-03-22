@@ -15,13 +15,19 @@ class RestaurantList(APIView):
 
 class RestaurantCreate(APIView):
     permission_classes = [IsOwner]
+
     def post(self, request):
         # Create a new restaurant
         serializer = RestaurantSerializer(data=request.data)
         if serializer.is_valid():
-            serializer.save()
+            self.perform_create(serializer)
             return Response(serializer.data, status=status.HTTP_201_CREATED)
         return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
+    
+    def perform_create(self, serializer):
+        # Save the restaurant with the user from the request
+        serializer.save(owner=self.request.user)
+
 
 class RestaurantUpdate(APIView):
     permission_classes = [IsOwner]
@@ -54,9 +60,17 @@ class RestaurantDelete(APIView):
     
 
 class MenuItemList(APIView):
-    def get(self, request):
-        # Retrieve all menu items
-        menu_items = MenuItem.objects.all()
+    def get(self, request, restaurant_id=None):
+        # If a restaurant_id is provided, filter by that restaurant
+        if restaurant_id:
+            try:
+                restaurant = Restaurant.objects.get(id=restaurant_id)
+                menu_items = MenuItem.objects.filter(restaurant=restaurant)
+            except Restaurant.DoesNotExist:
+                return Response({"detail": "Restaurant not found."}, status=status.HTTP_404_NOT_FOUND)
+        else:
+            menu_items = MenuItem.objects.all()
+        
         serializer = MenuItemSerializer(menu_items, many=True)
         return Response(serializer.data)
 

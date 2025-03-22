@@ -10,20 +10,19 @@ class Order(models.Model):
         ('Canceled', 'Canceled'),  # Added Canceled status
     ]
     user = models.ForeignKey(User, on_delete=models.CASCADE)
-    restaurant = models.ForeignKey(Restaurant, on_delete=models.CASCADE)
+    menuitem = models.ForeignKey(MenuItem, on_delete=models.CASCADE)
+    name = models.CharField(max_length=255)
+    number = models.IntegerField()
+    DeliveryAdress = models.CharField(max_length=255)
+    DeliveryInstructions = models.CharField(max_length=255,blank=True, null=True)
     status = models.CharField(max_length=50, choices=STATUS_CHOICES, default='Preparing')
     total_price = models.DecimalField(max_digits=10, decimal_places=2)
     order_created = models.DateTimeField(auto_now_add=True)
     cancel_reason = models.CharField(max_length=255, blank=True, null=True)
 
-    def __str__(self):
-        return f"Order {self.id} for {self.user.username}"
 
-    def cancel(self, reason):
-        """Helper method to cancel the order."""
-        self.status = 'Canceled'
-        self.cancel_reason = reason
-        self.save(update_fields=['status', 'cancel_reason'])
+    def __str__(self):
+        return f"Order by {self.user.username} for {self.menu_item.name}"
 
 class OrderItem(models.Model):
     order = models.ForeignKey(Order, on_delete=models.CASCADE, related_name='order_items')

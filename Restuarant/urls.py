@@ -12,7 +12,7 @@ urlpatterns = [
     path('restaurants/<int:pk>/delete/', RestaurantDelete.as_view(), name='restaurant-delete'),  # DELETE (Delete a restaurant)
 
     # MenuItem URLs
-    path('menu-items/', MenuItemList.as_view(), name='menu-item-list'),  # GET (List all menu items)
+    path('menu-items/<int:restaurant_id>/', MenuItemList.as_view(), name='menu-item-list'),  # GET (List all menu items)
     path('menu-items/create/', MenuItemCreate.as_view(), name='menu-item-create'),  # POST (Create a new menu item)
     path('menu-items/<int:pk>/update/', MenuItemUpdate.as_view(), name='menu-item-update'),  # PATCH (Update a menu item)
     path('menu-items/<int:pk>/delete/', MenuItemDelete.as_view(), name='menu-item-delete'),  # DELETE (Delete a menu item)

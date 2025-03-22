@@ -27,7 +27,7 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 SECRET_KEY = 'django-insecure-fnpo1*)bnaj8(xyc%6l@=bc@eiaofz)@-j399tbsxrzr1qgs!9'
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = False
+DEBUG = True
 
 ALLOWED_HOSTS = ['*']
 CSRF_TRUSTED_ORIGINS = ['http://localhost:5173', 'http://127.0.0.1:5173', 'https://quickfood-x9fk.onrender.com', 'https://quick-food-frontend.vercel.app/']

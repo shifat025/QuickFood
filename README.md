@@ -16,5 +16,5 @@ Api EndPoint : https://quickfood-x9fk.onrender.com/swagger/
 
 1. Clone the repository:
    ```bash
-   git clone https://github.com/username/repository-name.git](https://github.com/shifat025/QuickFood
+   git clone https://github.com/shifat025/QuickFood
    cd QuickFood
